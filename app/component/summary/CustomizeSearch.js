@@ -1,5 +1,5 @@
 import React from 'react';
-import { intlShape } from 'react-intl';
+import { intlShape, FormattedMessage } from 'react-intl';
 import range from 'lodash/range';
 import xor from 'lodash/xor';
 import without from 'lodash/without';
@@ -278,18 +278,7 @@ class CustomizeSearch extends React.Component {
     return (
       <div className="customize-search">
         <section className="offcanvas-section">
-          <ModeFilter
-            action={this.actions}
-            buttonClass="mode-icon"
-            selectedModes={
-              Object.keys(config.transportModes)
-                .filter(mode => config.transportModes[mode].availableForSelection)
-                .filter(mode => this.getMode(mode))
-                .map(mode => mode.toUpperCase())
-            }
-          />
-        </section>
-        <section className="offcanvas-section">
+          <h4><FormattedMessage id="main-mode" defaultMessage="I'm travelling by" /></h4>
           <div className="row btn-bar">
             <ToggleButton
               icon="walk"
@@ -313,8 +302,19 @@ class CustomizeSearch extends React.Component {
             />
           </div>
         </section>
+
         {config.customizeSearch.walkReluctance.available ? this.getWalkReluctanceSlider() : null}
         {config.customizeSearch.walkingSpeed.available ? this.getWalkSpeedSlider() : null}
+
+        <section className="offcanvas-section">
+          <h4><FormattedMessage id="using-modes" defaultMessage="Using" /></h4>
+          <ModeFilter
+            action={this.actions}
+            buttonClass="mode-icon"
+            selectedModes={this.context.getStore('ItinerarySearchStore').getMode()}
+          />
+        </section>
+
         {config.customizeSearch.walkBoardCost.available ? this.getWalkBoardCostSlider() : null}
         {config.customizeSearch.transferMargin.available ? this.getTransferMarginSlider() : null}
         {config.customizeSearch.ticketOptions.available ? this.getTicketSelector() : null}
