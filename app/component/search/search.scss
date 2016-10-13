@@ -59,26 +59,34 @@ $search-header-height: 45px;
 
 .fake-search-container.bp-large {
   padding-top: 30px;
-  padding-left: 50px;
+  padding-left: 20px;
   max-width: none;
   padding-right: 400px;
+  margin-left: auto;
+  margin-right:auto;
   .search-modal {
+    top:0;
     padding-left: 50px;
     border-radius: $border-radius-bigger;
     bottom: auto;
-    top:-25px;
-    left:52px;
+//    top:-25px;
+//    left:52px;
     max-width:720px;
     max-height: 550px;
     padding: 4px;
     width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
     input[type="text"].react-autowhatever__input {
-      border: 1px solid $gray;
+      border: 1px solid $primary-color;
       border-radius: 4px;
-      height: 4em;
+      height: 3em;
       padding: 10px;
       outline: 0;
       appearance: none;
+      font-size:19px;
+      @include font-medium;
     }
 
     .search-header .geolocation {
@@ -91,13 +99,22 @@ $search-header-height: 45px;
   }
 }
 
-search-modal-container {
-  padding-left: 50px;
-  padding-right: 400px;
+.search-modal-container {
+  padding-left: 20px;
+  left: 0;
+  max-width: none;
+  padding-right: 387px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  z-index: 9000;
+  width: 100%;
+  top: -17px;
 }
 
 .search-form.bp-large {
-  padding-top:0;
+  padding-top: 0;
+  max-width: 720px;
   .address-placeholder {
     padding-left: 18px;
   }
@@ -206,9 +223,15 @@ ul.react-autowhatever__items-list {
 
 }
 
+
 .search-form-map-overlay {
   z-index: 802;
-  max-width: 720px;
+}
+
+.bp-large {
+  .search-form-map-overlay {
+    max-width: 720px;
+  }
 }
 
 .geolocation-bar-location-icon {

@@ -3,9 +3,9 @@ import Helmet from 'react-helmet';
 import { intlShape } from 'react-intl';
 import meta from '../meta';
 import configureMoment from '../util/configure-moment';
-import { default as DefaultNavigation } from './navigation/DefaultNavigation';
 import MobileView from './MobileView';
 import DesktopView from './DesktopView';
+import AppBarContainer from './navigation/AppBarContainer';
 
 class TopLevel extends React.Component {
   static propTypes = {
@@ -79,7 +79,7 @@ class TopLevel extends React.Component {
 
     return (
       <div className="fullscreen">
-        <DefaultNavigation title={this.props.title} {...topBarOptions} />
+        <AppBarContainer title={this.props.title} {...topBarOptions} />
         <Helmet {...metadata} />
         <section ref="content" className="content" style={{ height: `calc(100% - ${menuHeight})` }}>
           {this.props.meta}

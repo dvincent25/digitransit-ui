@@ -4,9 +4,10 @@ import { clearDestination } from '../action/EndpointActions';
 import FeedbackPanel from '../component/feedback/feedback-panel';
 import FrontPagePanelContainer from '../component/front-page/FrontPagePanelContainer';
 import MapWithTracking from '../component/map/MapWithTracking';
-import { SearchMainContainerWithBreakpoint } from '../component/search/SearchMainContainer';
 
 import config from '../config';
+import SearchMainContainer from '../component/search/SearchMainContainer';
+
 
 class IndexPage extends React.Component {
   static contextTypes = {
@@ -18,10 +19,6 @@ class IndexPage extends React.Component {
     breakpoint: React.PropTypes.string.isRequired,
     children: React.PropTypes.node,
     routes: React.PropTypes.array,
-  }
-
-  static defaultProps = {
-    breakpoint: 'medium',
   }
 
   componentWillMount = () => {
@@ -44,9 +41,9 @@ class IndexPage extends React.Component {
     return (
       <div className={`front-page fullscreen bp-${this.props.breakpoint}`} >
         <MapWithTracking breakpoint={this.props.breakpoint} showStops >
-          <SearchMainContainerWithBreakpoint /></MapWithTracking>
+          <SearchMainContainer /></MapWithTracking>
         <FrontPagePanelContainer
-          routes={this.props.routes} breakpoint={this.props.breakpoint}
+          routes={this.props.routes}
         >{this.props.children}</FrontPagePanelContainer>
         <FeedbackPanel />
       </div>
