@@ -166,9 +166,8 @@ const routes = (
       <TopLevel {...props} />
     )}
   >
-
     <Route
-      path="/" components={{
+      path="/" topBarOptions={{ disableBackButton: true }} components={{
         title: () => <span>{config.title}</span>,
         content: (props) => <SplashOrChildren><IndexPage {...props} /></SplashOrChildren>
         ,
@@ -291,8 +290,6 @@ const routes = (
         title: () => <span>{config.title}</span>,
         content: AboutPage }}
     />
-    {/* Main menu does not open without this in mock mode? */}
-    <Route path="/?mock" name="mockIndex" component={IndexPage} />
   </Route>
 );
 

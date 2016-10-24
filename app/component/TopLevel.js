@@ -3,9 +3,9 @@ import Helmet from 'react-helmet';
 import { intlShape } from 'react-intl';
 import meta from '../meta';
 import configureMoment from '../util/configure-moment';
+import AppBarContainer from './navigation/AppBarContainer';
 import MobileView from './MobileView';
 import DesktopView from './DesktopView';
-import AppBarContainer from './navigation/AppBarContainer';
 
 class TopLevel extends React.Component {
   static propTypes = {

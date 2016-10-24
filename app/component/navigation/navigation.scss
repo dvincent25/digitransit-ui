@@ -55,12 +55,17 @@ $content-background-color: $background-color;
   .logo {
     background-image: $nav-logo;
     background-size: contain;
+    background-repeat: no-repeat;
     max-width: 170px;
+    width: 170px;
+    height: $topbar-height;
   }
   .navi-logo {
-    margin-top:13px;
-    margin-bottom:13px;
-    max-height:34px;
+    margin-top: 13px;
+    margin-bottom: 13px;
+    max-height: 34px;
+    min-width: 100px; //for ff
+    cursor: pointer;
   }
   .hamburger-large {
     .main-menu-toggle {
@@ -76,6 +81,15 @@ $content-background-color: $background-color;
   }
 }
 
+.top-bar.pb-large {
+  height: 60px;
+}
+
+.app-bar-tabs {
+  > div:nth-child(1) {
+      height: 60px;
+  }
+}
 .lang-select {
   list-style: none;
   border-bottom: 1px solid #262626;

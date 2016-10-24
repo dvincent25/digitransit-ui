@@ -4,12 +4,11 @@ import AppBarSmall from './AppBarSmall';
 import AppBarLarge from './AppBarLarge';
 
 
-const AppBarContainer = ({ breakpoint, router, ...args }) =>
-  ((breakpoint !== 'large' &&
-    <AppBarSmall {...args} />) || <AppBarLarge
+const AppBarContainer = ({ breakpoint, router, ...args }) => (
+  (breakpoint !== 'large' &&
+    <AppBarSmall {...args} showLogo={router.isActive('/')} />) || <AppBarLarge
       {...args} titleClicked={() => router.push('/lahellasi')}
-    />
-);
+    />);
 
 const WithContext = getContext({ router: React.PropTypes.object.isRequired,
   breakpoint: React.PropTypes.string.isRequired })(AppBarContainer);
@@ -17,7 +16,6 @@ const WithContext = getContext({ router: React.PropTypes.object.isRequired,
 WithContext.propTypes = {
   disableBackButton: PropTypes.bool,
   title: PropTypes.node.isRequired,
-  showLogo: PropTypes.bool,
 };
 
 export default WithContext;

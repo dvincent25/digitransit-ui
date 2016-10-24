@@ -4,10 +4,8 @@ import { clearDestination } from '../action/EndpointActions';
 import FeedbackPanel from '../component/feedback/feedback-panel';
 import FrontPagePanelContainer from '../component/front-page/FrontPagePanelContainer';
 import MapWithTracking from '../component/map/MapWithTracking';
-
-import config from '../config';
 import SearchMainContainer from '../component/search/SearchMainContainer';
-
+import config from '../config';
 
 class IndexPage extends React.Component {
   static contextTypes = {

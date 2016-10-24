@@ -56,7 +56,6 @@ $search-header-height: 45px;
   }
 }
 
-
 .fake-search-container.bp-large {
   padding-top: 30px;
   padding-left: 20px;
@@ -89,8 +88,22 @@ $search-header-height: 45px;
       @include font-medium;
     }
 
-    .search-header .geolocation {
-      top:11px;
+    .clear-icon {
+      top:8px;
+    }
+
+    .search-header {
+
+      .search-header__button {
+        font-size: 15px !important;
+      }
+
+      .geolocation {
+
+        .geolocation-selected {
+          padding: 13.5px;
+        }
+      }
     }
 
     #react-whatever-suggest{
@@ -151,7 +164,7 @@ ul.react-autowhatever__items-list {
   max-height: 9em;
   overflow-y: auto;
   margin-top: 10px;
-  max-height: calc(100% - 20px);
+  max-height: 412px;
 
   li {
 
@@ -220,23 +233,10 @@ ul.react-autowhatever__items-list {
     padding-left: 3px;
     padding-right: 10px;
   }
-
 }
-
 
 .search-form-map-overlay {
   z-index: 802;
-}
-
-.bp-large {
-  .search-form-map-overlay {
-    max-width: 720px;
-  }
-}
-
-.geolocation-bar-location-icon {
-  //height:16px;
-//  margin-right: 10px;
 }
 
 .geolocation-bar-location-icon svg.icon {
