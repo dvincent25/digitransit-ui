@@ -311,7 +311,7 @@ class CustomizeSearch extends React.Component {
           <ModeFilter
             action={this.actions}
             buttonClass="mode-icon"
-            selectedModes={this.context.getStore('ItinerarySearchStore').getMode()}
+            selectedModes={this.getModes()}
           />
         </section>
 
