@@ -6,6 +6,7 @@ import configureMoment from '../util/configure-moment';
 import AppBarContainer from './navigation/AppBarContainer';
 import MobileView from './MobileView';
 import DesktopView from './DesktopView';
+import MessageBar from './navigation/MessageBar';
 
 class TopLevel extends React.Component {
   static propTypes = {
@@ -75,13 +76,12 @@ class TopLevel extends React.Component {
       );
     }
 
-    const menuHeight = (this.getBreakpoint() === 'large' && '60px') || '40px';
-
     return (
-      <div className="fullscreen">
+      <div className="fullscreen flex-vertical">
         <AppBarContainer title={this.props.title} {...topBarOptions} />
+        <MessageBar />
         <Helmet {...metadata} />
-        <section ref="content" className="content" style={{ height: `calc(100% - ${menuHeight})` }}>
+        <section ref="content" className="content">
           {this.props.meta}
           { content }
         </section>

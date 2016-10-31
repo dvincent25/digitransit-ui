@@ -158,14 +158,16 @@ $content-background-color: $background-color;
   padding: 5px 20px;
 }
 
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
 /* content */
-// TODO: This is an ugly hack
-// Performance with flex is ok after 9b3d165f2385f4737f757f77e0faa2d74e003119, which was reverted
-// Should-be re-enabled after safari fixes https://github.com/philipwalton/flexbugs/issues/84
-// Work-around using position: absolute; and pinning all corners made the performance really bad
 section.content {
   background-color: $content-background-color;
-  height: calc(100% - #{$topbar-height});
+  flex-basis: 100%;
+  max-height: 100%;
   position: relative;
 
   .mobile {
@@ -196,17 +198,6 @@ section.content {
       position: relative;
     }
   }
-}
-
-
-.content.bp-large {
-  height: calc(100% - 60px);
-  position: relative;
-}
-
-.content:nth-child(5) {
-  height: calc(100% - #{$topbar-height} - 60px - 18px);
-  // 60px and 18px are the height of the message bar, but is specified in js
 }
 
 .message-bar {
