@@ -161,140 +161,142 @@ const TerminalTitle = withProps({
 })(FormattedMessage);
 
 const routes = (
-  <Route
-    component={(props) => (typeof window !== 'undefined' ?
-      <ContainerDimensions><TopLevel {...props} /></ContainerDimensions> :
-      <TopLevel {...props} />
-    )}
-  >
+  <Route>
     <Route
-      path="/" topBarOptions={{ disableBackButton: true }} components={{
-        title: () => <span>{config.title}</span>,
-        content: (props) => <SplashOrChildren><IndexPage {...props} /></SplashOrChildren>
-        ,
-      }}
+      component={(props) => (typeof window !== 'undefined' ?
+        <ContainerDimensions><TopLevel {...props} /></ContainerDimensions> :
+        <TopLevel {...props} />
+      )}
     >
       <Route
-        path="lahellasi" component={NearbyRoutesPanel}
-      />
-      <Route
-        path="suosikit" component={FavouritesPanel}
-      />
-    </Route>
+        path="/" topBarOptions={{ disableBackButton: true }} components={{
+          title: () => <span>{config.title}</span>,
+          content: (props) => <SplashOrChildren><IndexPage {...props} /></SplashOrChildren>
+          ,
+        }}
+      >
+        <Route
+          path="lahellasi" component={NearbyRoutesPanel}
+        />
+        <Route
+          path="suosikit" component={FavouritesPanel}
+        />
+      </Route>
 
-    <Route path="/pysakit">
-      <IndexRoute component={Error404} /> {/* TODO: Should return list of all routes*/}
-      <Route
-        path=":stopId"
-        components={{
-          title: StopTitle,
-          header: StopPageHeaderContainer,
-          content: StopPage,
-          map: StopPageMap,
-          meta: StopPageMeta,
-        }}
-        queries={{
-          header: StopQueries,
-          content: StopQueries,
-          map: StopQueries,
-          meta: StopQueries,
-        }}
-        render={{
-          // eslint-disable-next-line react/prop-types
-          header: ({ props }) => (props ? <StopPageHeaderContainer {...props} /> : <LoadingPage />),
-          // eslint-disable-next-line react/prop-types
-          content: ({ props }) => (props ? <StopPage {...props} /> : false),
-        }}
-      >
-        <Route path="kartta" fullscreenMap />
-        <Route path="info" component={Error404} />
+      <Route path="/pysakit">
+        <IndexRoute component={Error404} /> {/* TODO: Should return list of all routes*/}
+        <Route
+          path=":stopId"
+          components={{
+            title: StopTitle,
+            header: StopPageHeaderContainer,
+            content: StopPage,
+            map: StopPageMap,
+            meta: StopPageMeta,
+          }}
+          queries={{
+            header: StopQueries,
+            content: StopQueries,
+            map: StopQueries,
+            meta: StopQueries,
+          }}
+          render={{
+            // eslint-disable-next-line react/prop-types
+            header: ({ props }) => (props ? <StopPageHeaderContainer {...props} /> : <LoadingPage />),
+            // eslint-disable-next-line react/prop-types
+            content: ({ props }) => (props ? <StopPage {...props} /> : false),
+          }}
+        >
+          <Route path="kartta" fullscreenMap />
+          <Route path="info" component={Error404} />
+        </Route>
       </Route>
-    </Route>
-    <Route path="/terminaalit">
-      <IndexRoute component={Error404} /> {/* TODO: Should return list of all terminals*/}
-      <Route
-        path=":terminalId"
-        components={{
-          title: TerminalTitle,
-          header: StopPageHeaderContainer,
-          content: StopPage,
-          map: StopPageMap,
-          meta: StopPageMeta,
-        }}
-        queries={{
-          header: terminalQueries,
-          content: terminalQueries,
-          map: terminalQueries,
-          meta: terminalQueries,
-        }}
-      >
-        <Route path="kartta" fullscreenMap />
+      <Route path="/terminaalit">
+        <IndexRoute component={Error404} /> {/* TODO: Should return list of all terminals*/}
+        <Route
+          path=":terminalId"
+          components={{
+            title: TerminalTitle,
+            header: StopPageHeaderContainer,
+            content: StopPage,
+            map: StopPageMap,
+            meta: StopPageMeta,
+          }}
+          queries={{
+            header: terminalQueries,
+            content: terminalQueries,
+            map: terminalQueries,
+            meta: terminalQueries,
+          }}
+        >
+          <Route path="kartta" fullscreenMap />
+        </Route>
       </Route>
-    </Route>
-    <Route path="/linjat">
-      <IndexRoute component={Error404} />
-      <Route
-        path=":routeId"
-        components={{ title: RouteTitle, content: RoutePage }}
-        queries={{ title: RouteQueries, content: RouteQueries }}
-      >
-        <IndexRedirect to="pysakit" />
-        <Route path="pysakit" component={RoutePatternSelectContainer} queries={RouteQueries}>
-          <IndexRedirect to=":routeId%3A0%3A01" /> {/* Redirect to first pattern of route*/}
-          <Route path=":patternId">
-            <IndexRoute component={PatternStopsContainer} queries={PatternQueries} />
-            <Route
-              path="kartta"
-              component={PatternStopsContainer}
-              queries={PatternQueries}
-              fullscreenMap
-            />
-            <Route path=":tripId">
-              <IndexRoute component={TripStopsContainer} queries={TripQueries} />
+      <Route path="/linjat">
+        <IndexRoute component={Error404} />
+        <Route
+          path=":routeId"
+          components={{ title: RouteTitle, content: RoutePage }}
+          queries={{ title: RouteQueries, content: RouteQueries }}
+        >
+          <IndexRedirect to="pysakit" />
+          <Route path="pysakit" component={RoutePatternSelectContainer} queries={RouteQueries}>
+            <IndexRedirect to=":routeId%3A0%3A01" /> {/* Redirect to first pattern of route*/}
+            <Route path=":patternId">
+              <IndexRoute component={PatternStopsContainer} queries={PatternQueries} />
               <Route
                 path="kartta"
-                component={TripStopsContainer}
-                queries={TripQueries}
+                component={PatternStopsContainer}
+                queries={PatternQueries}
                 fullscreenMap
               />
+              <Route path=":tripId">
+                <IndexRoute component={TripStopsContainer} queries={TripQueries} />
+                <Route
+                  path="kartta"
+                  component={TripStopsContainer}
+                  queries={TripQueries}
+                  fullscreenMap
+                />
+              </Route>
             </Route>
           </Route>
+          <Route path="aikataulu" component={RoutePatternSelectContainer} queries={RouteQueries}>
+            <IndexRedirect to=":routeId%3A0%3A01" />
+            <Route path=":patternId" component={RouteScheduleContainer} queries={PatternQueries} />
+          </Route>
+          <Route path="hairiot" component={RouteAlertsContainer} queries={RouteQueries} />
         </Route>
-        <Route path="aikataulu" component={RoutePatternSelectContainer} queries={RouteQueries}>
-          <IndexRedirect to=":routeId%3A0%3A01" />
-          <Route path=":patternId" component={RouteScheduleContainer} queries={PatternQueries} />
+      </Route>
+      <Route
+        path="/reitti/:from/:to"
+        components={{
+          title: SummaryTitle,
+          content: SummaryPage,
+        }}
+        queries={{ content: planQueries }}
+        prepareParams={preparePlanParams}
+        render={{ content: SummaryPageWrapper }}
+        loadAction={(params) => [
+          [storeEndpoint, { target: 'origin', endpoint: otpToLocation(params.from) }],
+          [storeEndpoint, { target: 'destination', endpoint: otpToLocation(params.to) }],
+        ]}
+      >
+        <Route path=":hash" components={{ content: ItineraryTab, map: ItineraryPageMap }}>
+          <Route path="kartta" fullscreenMap />
         </Route>
-        <Route path="hairiot" component={RouteAlertsContainer} queries={RouteQueries} />
       </Route>
-    </Route>
-    <Route
-      path="/reitti/:from/:to"
-      components={{
-        title: SummaryTitle,
-        content: SummaryPage,
-      }}
-      queries={{ content: planQueries }}
-      prepareParams={preparePlanParams}
-      render={{ content: SummaryPageWrapper }}
-      loadAction={(params) => [
-        [storeEndpoint, { target: 'origin', endpoint: otpToLocation(params.from) }],
-        [storeEndpoint, { target: 'destination', endpoint: otpToLocation(params.to) }],
-      ]}
-    >
-      <Route path=":hash" components={{ content: ItineraryTab, map: ItineraryPageMap }}>
-        <Route path="kartta" fullscreenMap />
-      </Route>
+      <Route path="/suosikki/uusi" component={AddFavouritePage} />
+      <Route path="/suosikki/muokkaa/:id" component={AddFavouritePage} />
+      <Route
+        path="/tietoja-palvelusta"
+        components={{
+          title: () => <span>{config.title}</span>,
+          content: AboutPage }}
+      />
     </Route>
     <Route path="/styleguide" component={StyleGuidelines} />
     <Route path="/styleguide/component/:componentName" component={StyleGuidelines} />
-    <Route path="/suosikki/uusi" component={AddFavouritePage} />
-    <Route path="/suosikki/muokkaa/:id" component={AddFavouritePage} />
-    <Route
-      path="/tietoja-palvelusta"
-      components={{
-        title: () => <span>{config.title}</span>,
-        content: AboutPage }}
-    />
   </Route>
 );
 
