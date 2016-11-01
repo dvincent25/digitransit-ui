@@ -202,7 +202,8 @@ const routes = (
           }}
           render={{
             // eslint-disable-next-line react/prop-types
-            header: ({ props }) => (props ? <StopPageHeaderContainer {...props} /> : <LoadingPage />),
+            header: ({ props }) =>
+              (props ? <StopPageHeaderContainer {...props} /> : <LoadingPage />),
             // eslint-disable-next-line react/prop-types
             content: ({ props }) => (props ? <StopPage {...props} /> : false),
           }}
