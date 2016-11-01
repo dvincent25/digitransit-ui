@@ -29,6 +29,8 @@ $offcanvas-link-text-font-size: 15px;
 $content-background-color: $background-color;
 
 .top-bar {
+  flex-basis: 40px;
+  flex-grow: 0;
   line-height: $topbar-height;
   background: $primary-color;
   position: relative;
@@ -164,27 +166,29 @@ $content-background-color: $background-color;
 }
 
 /* content */
-section.content {
+.content {
   background-color: $content-background-color;
-  flex-basis: 100%;
-  max-height: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  display: flex;
+  overflow-y: hidden;
   position: relative;
 
   .mobile {
     display: flex;
     flex-direction: column;
-    height: 100%;
     position: relative;
+    flex-grow: 1;
   }
 
   .desktop {
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
-    height: 100%;
 
     .main-content {
       width: 600px;
-      height: 100%;
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -192,8 +196,8 @@ section.content {
 
     .map-content {
       width: calc(100% - 600px);
-      height: 100%;
       display: flex;
+      flex-grow: 1;
       flex-direction: column;
       position: relative;
     }
@@ -201,6 +205,8 @@ section.content {
 }
 
 .message-bar {
+  flex-grow: 0;
+  flex-basis: 70px;
   @include font-book;
   font-size: $font-size-small;
   line-height: 14px;

@@ -178,14 +178,11 @@ $heading-color: #858585;
 }
 
 .front-page { //small, mid
+  flex-grow:1;
+  display:flex;
+  flex-direction: column;
   .map.fullscreen {
-    height: calc(100% - 50px);
-  }
-}
-
-.front-page.bp-large { //large
-  .map.fullscreen {
-    height: 100%;
+    flex-grow:1;
   }
 }
 
