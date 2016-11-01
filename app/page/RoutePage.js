@@ -66,13 +66,13 @@ class RoutePage extends React.Component {
     };
 
     return (
-      <div className="fullscreen">
+      <div className="flex-grow flex-vertical">
         <Helmet {...meta} />
         <FavouriteRouteContainer
           className="route-page-header"
           gtfsId={this.props.route.gtfsId}
         />
-        <div className="tabs route-tabs">
+        <div className="tabs route-tabs flex-grow">
           <nav className="tabs-navigation">
             <Link to={`/linjat/${this.props.route.gtfsId}/pysakit`} activeClassName="is-active">
               <div>
